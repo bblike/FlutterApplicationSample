@@ -12,7 +12,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-
+  bool _obscurePassword = true; // fixed typo
   String _errorText = '';
 
   // 模拟登录逻辑
@@ -24,6 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   void _handleLogin() {
     String username = _usernameController.text;
     String password = _passwordController.text;
+    // Removed: bool _obsurePassword = true;
 
     if (validateUser(username, password)) {
       User user = User(1, username, password);
@@ -39,7 +40,8 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         _errorText = '用户名或密码错误';
       });
-  }}
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +50,26 @@ class _LoginPageState extends State<LoginPage> {
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
-          children: [
+          children: [    
             TextField(
               controller: _usernameController,
               decoration: const InputDecoration(labelText: '用户名'),
             ),
+
             TextField(
               controller: _passwordController,
-              decoration: const InputDecoration(labelText: '密码'),
-              obscureText: true,
+              obscureText: _obscurePassword, // fixed typo
+              decoration: InputDecoration(
+                labelText: '密码',
+                suffixIcon: IconButton(
+                  icon: _obscurePassword ? Icon(Icons.visibility_off) : Icon(Icons.visibility), // fixed typo
+                  onPressed: () {
+                    setState(() {
+                      _obscurePassword = !_obscurePassword; // fixed typo
+                    });
+                  },
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
