@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'user.dart';
 import 'login_page.dart';
 
+
 class HomePage extends StatefulWidget {//封装
   final User user;
 

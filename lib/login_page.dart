@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {//功能实现
   // 登陆界面控制
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('账户登陆')),
+      appBar: AppBar(title: const Text('账户89登陆')),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
