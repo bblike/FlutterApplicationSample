@@ -15,22 +15,27 @@ class HomePage extends StatefulWidget {//封装
 
 class _HomePageState extends State<HomePage> {//实现
   int counter = 0;
-
+  String ImagePath = 'assets/tungtungtungsahur.jpg';
   @override
   Widget build(BuildContext context) {
+    // 获取屏幕长宽
+    final size = MediaQuery.of(context).size;
+    final screenWidth = size.width;
+    final screenHeight = size.height;
+
     return Scaffold(
       appBar: AppBar(title: Text('欢迎 ${widget.user.username}')),
       body: Column(
+        
         children: [
           Container(
+            
           width: 200,
           height: 200,
           alignment: Alignment.topCenter,
           padding: const EdgeInsets.all(20),
           margin: const EdgeInsets.all(20),
           transform: Matrix4.translationValues(0,0,0)..rotateZ(0),
-
-
           decoration: BoxDecoration(
             color: Colors.blue,
             borderRadius: BorderRadius.circular(10),
@@ -47,8 +52,10 @@ class _HomePageState extends State<HomePage> {//实现
               
             )
           ),
+
         child: Text(
-          '权限等级：${widget.user.authorityLevel} and $counter',
+          '权限等级：${widget.user.authorityLevel} \n'
+          'counter:  $counter',
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
@@ -115,6 +122,7 @@ class _HomePageState extends State<HomePage> {//实现
                         ),
                         TextButton(
                           onPressed: () => Navigator.of(context).pop(true),
+                          autofocus: true,
                           child: const Text('Yes'),
                         ),
                       ],
@@ -128,23 +136,52 @@ class _HomePageState extends State<HomePage> {//实现
                   }
                 },
               ),
+               
+
             ],
           ),
-        )
-          
+        ),
+        Image.asset(ImagePath), 
         ]  
       ),
-
       
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            counter++;
-          });
-        },
-        tooltip: "Special Key",
-        child: const Icon(Icons.add),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            heroTag: 'reset',
+            onPressed: () {
+              setState(() {
+                counter = 0;
+                updateImage();
+              });
+            },
+            tooltip: "Reset Counter",
+            child: const Icon(Icons.refresh),
+          ),
+          const SizedBox(width: 16),
+          FloatingActionButton(
+            heroTag: 'add',
+            onPressed: () {
+              setState(() {
+                counter++;
+                updateImage();
+              });
+            },
+            tooltip: "Special Key",
+            child: const Icon(Icons.add),
+          ),
+        ],
       ),
     );
   }
+  void updateImage(){
+  setState((){
+    if (counter % 2 == 1) {
+      ImagePath = 'assets/cappuccinoAssassino.jpg';
+    } else {
+      ImagePath = 'assets/tungtungtungsahur.jpg';
+    }
+  });
+}
 }

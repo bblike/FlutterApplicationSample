@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home_page.dart'; // 你的 HomePage 文件
 import 'user.dart'; // 如果你把 User 单独放在 user.dart 的话
 
+
 class LoginPage extends StatefulWidget {//封装
   const LoginPage({super.key});
 
@@ -53,7 +54,8 @@ class _LoginPageState extends State<LoginPage> {//功能实现
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
-          children: [    
+          children: [  
+            Image.asset('assets/trump.jpg'),  
             TextField(
               controller: _usernameController,
               decoration: const InputDecoration(labelText: '用户名'),
@@ -92,8 +94,10 @@ class _LoginPageState extends State<LoginPage> {//功能实现
                     setState(() {
                       _usernameController.text = 'admin';
                       _passwordController.text = '123456';
+                      
                     });
                   },
+                  autofocus: true,
                   child: const Text("Default User"),
                 ),
               ],
